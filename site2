@@ -6,9 +6,9 @@
   <title>{Title}</title>
   <style>
     :root{
-      --intro-bg:url("Fondo_intro");
-      --intro-win:url("Imagen%20intro");
-      --os-wall:url("brokensc-1536x864.jpg");
+      --intro-bg:url("https://raw.githubusercontent.com/KeanuCheese/MeetKeanu/0eea3cd83258d35474b7a98a0ed1c5f55d9cec77/descarga%20(3).png");
+      --intro-win:url("https://raw.githubusercontent.com/KeanuCheese/MeetKeanu/0eea3cd83258d35474b7a98a0ed1c5f55d9cec77/YWG.jpg");
+      --os-wall:url("https://raw.githubusercontent.com/KeanuCheese/MeetKeanu/0eea3cd83258d35474b7a98a0ed1c5f55d9cec77/brokensc-1536x864.jpg");
       --face:#c0c0c0; --light:#fff; --dark:#000; --mid:#808080; --hilight:#dfdfdf;
       --title:#000080; --title2:#1084d0;
     }
@@ -20,11 +20,11 @@
     [href*="instagram.com/triunvirato.elemental"]{display:none!important}
 
     .intro{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:1000;background:rgba(0,0,0,.2) var(--intro-bg) repeat}
-    .introCard{width:min(420px,74vw);aspect-ratio:1;border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:8px;background:rgba(0,0,0,.25);cursor:pointer;position:relative}
+    .introCard{width:min(420px,74vw);aspect-ratio:1;border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:8px;background:rgba(0,0,0,.25);cursor:pointer;position:relative;z-index:1001}
     .introCard img{width:100%;height:100%;object-fit:contain;border-radius:8px}
     .cta{position:fixed;z-index:1001;padding:7px 10px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;border-radius:999px;pointer-events:none;opacity:0;transform:translate(14px,14px)}
     .cta.on{opacity:1}
-    .trailLayer{position:fixed;inset:0;z-index:1002;pointer-events:none}
+    .trailLayer{position:fixed;inset:0;z-index:1004;pointer-events:none}
     .trailItem{position:absolute;max-width:220px;max-height:220px;transform:translate(-50%,-50%) rotate(var(--r));filter:drop-shadow(0 8px 12px rgba(0,0,0,.4))}
 
     .os{position:fixed;inset:0;background:var(--os-wall) center/cover no-repeat;opacity:0;pointer-events:none}
@@ -36,7 +36,7 @@
     .deskIcon .lbl{font-size:12px;text-align:center;line-height:1.1;word-break:break-word}
     .deskIcon.sel{outline:1px dotted #fff;outline-offset:2px;background:rgba(0,0,0,.2)}
 
-    .taskbar{position:absolute;left:0;right:0;bottom:0;height:42px;padding:0 8px;background:var(--face);border-top:1px solid #7a7a7a;display:flex;align-items:center;gap:8px;z-index:200}
+    .taskbar{position:absolute;left:0;right:0;bottom:0;height:42px;padding:0 8px;background:var(--face);border-top:1px solid #7a7a7a;display:flex;align-items:center;gap:8px;z-index:500}
     .start,.task,.clock,.startMenu,.btn,.calcBtn{border:1px solid #2f2f2f;background:var(--face)}
     .start{padding:6px 10px;display:flex;gap:8px;align-items:center;cursor:pointer;font-size:12px}
     .start:active,.task.active,.btn:active,.calcBtn:active{border-color:var(--dark) var(--light) var(--light) var(--dark)}
@@ -73,7 +73,7 @@
     .body{flex:1;background:#d4d4d4;padding:0;overflow:auto}
     .panel{background:#efefef;padding:10px;border:none;font-size:13px;height:100%}
     .embed{width:100%;height:100%;min-height:420px;border:none;background:#000}
-    .tiny{font-size:11px;color:#333}.sourceLink{margin-top:6px;text-align:right;font-size:11px;color:#1f3f7f;word-break:break-all}.sourceLink a{color:inherit;text-decoration:none}.sourceLink a:hover{text-decoration:underline}
+    .tiny{font-size:11px;color:#333}
     .folderGrid{display:flex;flex-direction:column;gap:4px}
     .entry{display:flex;gap:8px;align-items:center;padding:6px 8px;border:1px solid #b3b3b3;background:#f5f5f5;cursor:pointer;width:100%}
     .entry:hover{background:#dce8ff}
@@ -81,6 +81,7 @@
 
     .introCredit{position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);color:#fff;font-size:12px;text-shadow:0 1px 2px #000;white-space:nowrap}
 
+    .watermark{position:absolute;right:12px;bottom:50px;z-index:30;color:rgba(255,255,255,.85);text-shadow:0 1px 2px #000;font:15px/1.08 monospace;white-space:pre;pointer-events:none;text-align:left;background:transparent}
     .footer{display:none}
     @media (max-width:680px){.win{left:8px!important;top:54px!important;width:calc(100vw - 16px)!important;height:calc(100vh - 102px)!important}.tasks{max-width:54vw}}
   </style>
@@ -88,16 +89,26 @@
 <body>
 <div id="intro" class="intro">
   <div class="trailLayer" id="trail"></div>
-  <div id="introCard" class="introCard" tabindex="0"><img src="Imagen%20intro" alt="Intro"/><div class="introCredit">Made by Keanucheese</div></div>
+  <div id="introCard" class="introCard" tabindex="0"><img src="https://raw.githubusercontent.com/KeanuCheese/MeetKeanu/0eea3cd83258d35474b7a98a0ed1c5f55d9cec77/YWG.jpg" alt="Intro"/><div class="introCredit">Made by Keanucheese</div></div>
 </div>
 <div id="cta" class="cta">CLICK TO CONTINUE</div>
 <div id="audioBtnIntro" class="audioCtrl" style="position:fixed;right:14px;bottom:14px;z-index:1003" title="Audio ambiente">▶</div>
 
 <div id="os" class="os" aria-label="KeanuOS">
   <div class="desktop" id="desktop"><div class="icons" id="icons"></div></div>
+  <pre class="watermark">⠀⠀⡤⠤⣤⣀⣀⣠⣴⣶⣤⠤⢤⡀
+⠀⠀⣇⠀⠀⠀⠀⢸⣿⣿⣿⣶⣾⣷
+⠀⢰⠃⠀⠀⠀⠀⠀⠉⠉⠛⠿⣿⡟
+⠖⣺⣀⠀⣤⠀⠀⠀⠀⠀⣤⠀⣐⣟⡒⠂
+⠩⢿⡏⢉⣆⠀⠀⠛⠂⠀⢠⣋⠙⡿⠍
+⠀⠀⠛⡏⣸⣶⣤⠤⢤⣶⣮⢈⡟⠁
+⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣯
+⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⠀⠀⠀⠸⣦⡀⠀⣸⡀⠀⣠⡞
+⠀⠀⠀⠀⠀⠉⠉⠁⠉⠉</pre>
     <div class="taskbar">
     <div class="start" id="startBtn"><span>🟩</span><span>Start</span></div>
-    <div class="tasks" id="tasks"></div><div class="spacer"></div><div class="audioCtrl" id="audioBtnTask" title="Audio ambiente">▶</div><div class="clock" id="clock">--:--</div>
+    <div class="tasks" id="tasks"></div><div class="spacer"></div><div class="audioCtrl" id="audioBtnTask" title="Audio ambiente" style="display:none">▶</div><div class="clock" id="clock">--:--</div>
   </div>
   <div class="startMenu" id="startMenu">
     <div class="smHead">KeanuOS</div>
@@ -136,15 +147,16 @@ const TRAIL_GIFS = [
 const intro=document.getElementById('intro'), os=document.getElementById('os'), cta=document.getElementById('cta'), trail=document.getElementById('trail');
 const introCardImg=document.querySelector('#introCard img');
 function loadFirstImage(urls, apply){const list=[...new Set(urls.filter(Boolean))];const tryAt=(i)=>{if(i>=list.length)return;const img=new Image();img.onload=()=>apply(list[i]);img.onerror=()=>tryAt(i+1);img.src=list[i];};tryAt(0);}
-loadFirstImage(['Fondo_intro','https://raw.githubusercontent.com/KeanuCheese/Theme-K/main/Fondo_intro','https://raw.githubusercontent.com/KeanuCheese/MeetKeanu/3baa25e4ecfbab3995c8f18cbb96e161dc89ee4d/Fondo_intro'],u=>document.documentElement.style.setProperty('--intro-bg',`url("${u}")`));
-loadFirstImage(['brokensc-1536x864.jpg','https://raw.githubusercontent.com/KeanuCheese/Theme-K/main/brokensc-1536x864.jpg','https://raw.githubusercontent.com/KeanuCheese/MeetKeanu/3baa25e4ecfbab3995c8f18cbb96e161dc89ee4d/brokensc-1536x864.jpg'],u=>document.documentElement.style.setProperty('--os-wall',`url("${u}")`));
-loadFirstImage(['Imagen%20intro','https://raw.githubusercontent.com/KeanuCheese/Theme-K/main/Imagen%20intro','https://raw.githubusercontent.com/KeanuCheese/MeetKeanu/3baa25e4ecfbab3995c8f18cbb96e161dc89ee4d/Imagen%20intro'],u=>{introCardImg.src=u;document.documentElement.style.setProperty('--intro-win',`url("${u}")`)});
-let bag=[],last="",spawnAt=0;
-function refill(){bag=[...TRAIL_GIFS].sort(()=>Math.random()-.5)}
-function pick(){if(!bag.length)refill();let v=bag.pop();if(v===last&&bag.length)v=bag.pop();last=v;return v}
+loadFirstImage(['https://raw.githubusercontent.com/KeanuCheese/MeetKeanu/0eea3cd83258d35474b7a98a0ed1c5f55d9cec77/descarga%20(3).png','descarga%20(3).png','Fondo_intro'],u=>document.documentElement.style.setProperty('--intro-bg',`url("${u}")`));
+loadFirstImage(['https://raw.githubusercontent.com/KeanuCheese/MeetKeanu/0eea3cd83258d35474b7a98a0ed1c5f55d9cec77/brokensc-1536x864.jpg','brokensc-1536x864.jpg'],u=>document.documentElement.style.setProperty('--os-wall',`url("${u}")`));
+loadFirstImage(['https://raw.githubusercontent.com/KeanuCheese/MeetKeanu/0eea3cd83258d35474b7a98a0ed1c5f55d9cec77/YWG.jpg','YWG.jpg','Imagen%20intro'],u=>{introCardImg.src=u;document.documentElement.style.setProperty('--intro-win',`url("${u}")`)});
+let bag=[],last="",spawnAt=0,recent=[];
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function refill(){bag=shuffle([...TRAIL_GIFS])}
+function pick(){if(!bag.length)refill();let tries=0,v=bag.pop();while((v===last||recent.includes(v))&&bag.length&&tries<12){v=bag.pop();tries++}last=v;recent.push(v);if(recent.length>10)recent.shift();return v}
 refill();
 addEventListener('mousemove',e=>{if(intro.style.display==='none')return;cta.style.left=e.clientX+'px';cta.style.top=e.clientY+'px';cta.classList.add('on');if(performance.now()-spawnAt<300)return;spawnAt=performance.now();const im=new Image();im.className='trailItem';im.style.left=e.clientX+'px';im.style.top=e.clientY+'px';im.style.setProperty('--r',`${Math.floor(Math.random()*46-23)}deg`);im.loading='eager';im.decoding='async';im.onload=()=>{trail.appendChild(im);while(trail.children.length>180)trail.removeChild(trail.firstChild)};im.onerror=()=>{im.remove()};im.src=pick()});
-function showOS(){intro.style.display='none';cta.style.display='none';os.classList.add('on');initAmbientPlayer();attemptUnmute();}
+function showOS(){intro.style.display='none';cta.style.display='none';document.getElementById('audioBtnIntro').style.display='none';document.getElementById('audioBtnTask').style.display='grid';os.classList.add('on');attemptUnmute();openURLWindow('Amazonic.wav_nino_aldana','🎞️','https://www.youtube.com/watch?v=ynE_ngyTy08&autoplay=1&mute=1');openURLWindow('Extract_Chronos_1985_RonFricke','🎬','https://www.youtube.com/watch?v=U-_DxBxDtVE&autoplay=1');}
 document.getElementById('introCard').addEventListener('click',showOS);
 document.getElementById('introCard').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showOS();}});
 
@@ -166,13 +178,14 @@ const modules={
     {icon:'🎞️',name:'CloudAtlas_2013_LanaWachowski_TomTykwer_LillyWachowski',url:'https://youtu.be/gTHgYkP_ksg?si=h8SkPasXsRMmh1Py'},
     {icon:'🧛',name:'Bride_of_Deimos_1988_Rintaro_byMadhouse',url:'https://youtu.be/KScaPWhZxmI?si=E_QQSK8grr-BVsQL'},
     {icon:'🧛',name:'Vampire_HunterD_Bloodlust_2000_YoshiakiKawajiri_byMadhause',url:'https://youtu.be/IIHnnI17joE?si=bX3nugK40jgKXtHf'},
-    {icon:'🎬',name:'Estract_Chronos_1985_RonFricke',url:'https://www.youtube-nocookie.com/embed/U-_DxBxDtVE'},
+    {icon:'🎬',name:'Extract_Chronos_1985_RonFricke',url:'https://www.youtube-nocookie.com/embed/U-_DxBxDtVE'},
+    {icon:'🎞️',name:'Amazonic.wav_nino_aldana',url:'https://www.youtube.com/watch?v=ynE_ngyTy08&autoplay=1&mute=1'},
     {icon:'📕',name:'El_Principito_Antoine_de_SaintExupéry',url:'https://digitales.bcn.gob.ar/files/textos/El-Principitocompleto.pdf'}
   ]}
 };
 
 const desktopIcons=[
-  {id:'collabs',label:'Collabs',icon:'🤝',x:18,y:112,open:()=>openFolder('collabs')},
+  {id:'collabs',label:'Collabs',icon:'🤝',x:18,y:112,open:()=>openURLWindow('Collabs','🤝','https://nexusgenesis.odooconsultores.cl/collabs')},
   {id:'multimedia',label:'Multimedia',icon:'🎬',x:18,y:206,open:()=>openFolder('multimedia')},
   {id:'dali',label:'Dreams of Dali: 360',icon:'🎥',x:18,y:300,open:()=>openURLWindow('Dreams of Dali: 360','🎥','https://www.youtube-nocookie.com/embed/F1eLeIocAcU')},
   {id:'stoken',label:'Quest for stoken',icon:'🪙',x:18,y:394,open:()=>openURLWindow('Quest for stoken','🪙','https://quest-for-stoken.vercel.app/')}
@@ -216,7 +229,9 @@ function urlToEmbed(url){
       else if(u.hostname.includes('youtube-nocookie.com') && u.pathname.includes('/embed/')) vid=u.pathname.split('/embed/')[1].split('/')[0];
       else if(u.pathname.includes('/embed/')) vid=u.pathname.split('/embed/')[1].split('/')[0];
       else vid=u.searchParams.get('v');
-      if(vid) return `https://www.youtube-nocookie.com/embed/${vid}?autoplay=0&rel=0&modestbranding=1&playsinline=1`;
+      const wantAutoplay=(u.searchParams.get('autoplay')==='1')||/autoplay=1/.test(url);
+      const wantMute=(u.searchParams.get('mute')==='1')||/mute=1/.test(url);
+      if(vid) return `https://www.youtube-nocookie.com/embed/${vid}?autoplay=${wantAutoplay?1:0}&mute=${wantMute?1:0}&rel=0&modestbranding=1&playsinline=1`;
     }
     if(u.hostname.includes('odysee.com')) return `https://odysee.com/$/embed${u.pathname}${u.search}`;
     if(url.toLowerCase().endsWith('.pdf')) return `https://drive.google.com/viewerng/viewer?embedded=1&url=${encodeURIComponent(url)}`;
@@ -224,8 +239,8 @@ function urlToEmbed(url){
   }catch{}
   return url;
 }
-function openURLWindow(title,icon,url){const embed=urlToEmbed(url);const media=(url.includes('youtube')||url.includes('youtu.be')||url.includes('youtube-nocookie')||url.toLowerCase().includes('.pdf')||url.includes('drive.google.com'));if(media){const vertical=/teaser|shorts|vertical/i.test(title+url);openModal(embed,vertical,url);return;}mkWindow('url:'+title,title,icon,`<div class='panel' style='display:flex;flex-direction:column;gap:0'><iframe class='embed' src='${embed}' allow='autoplay; fullscreen; encrypted-media; picture-in-picture' referrerpolicy='strict-origin-when-cross-origin' loading='lazy'></iframe><div class='sourceLink'><a href='${url}' target='_blank' rel='noopener'>${url}</a></div></div>`)}
-function openFolder(id){const f=modules[id];if(!f)return;const html=`<div class='panel'><div class='folderGrid'>${f.items.map((it,ix)=>`<div class='entry' data-i='${ix}'><div>${it.icon}</div><div><b>${it.name}</b><div class='tiny'>Abrir en ventana del sistema</div></div></div>`).join('')}</div></div>`;const w=mkWindow(id,f.title,f.icon,html);w.querySelectorAll('.entry').forEach(e=>e.onclick=()=>{const it=f.items[+e.dataset.i];openURLWindow(it.name,it.icon,it.url)});
+function openURLWindow(title,icon,url){const embed=urlToEmbed(url);const isPdfDrive=url.toLowerCase().includes('.pdf')||url.includes('drive.google.com');if(isPdfDrive){const vertical=/teaser|shorts|vertical/i.test(title+url);openModal(embed,vertical,url);return;}const w=mkWindow('url:'+title,title,icon,`<div class='panel' style='display:flex;flex-direction:column;gap:0'><iframe class='embed' src='${embed}' allow='autoplay; fullscreen; encrypted-media; picture-in-picture' referrerpolicy='strict-origin-when-cross-origin' loading='lazy'></iframe></div>`);if(url.includes('nexusgenesis.odooconsultores.cl/collabs')){w.style.width=Math.max(780,Math.min(innerWidth-24,1180))+'px';w.style.height=Math.max(520,Math.min(innerHeight-96,760))+'px';}}
+function openFolder(id){const f=modules[id];if(!f)return;const html=`<div class='panel'><div class='folderGrid'>${f.items.map((it,ix)=>`<div class='entry' data-i='${ix}'><div>${it.icon}</div><div><b>${it.name}</b>${id==='multimedia'?'':'<div class=\'tiny\'>Abrir en ventana del sistema</div>'}</div></div>`).join('')}</div></div>`;const w=mkWindow(id,f.title,f.icon,html);if(id==='multimedia'){w.style.width=Math.max(560,Math.min(780,innerWidth-24))+'px';w.style.height=Math.max(280,Math.min(440,innerHeight-96))+'px';}w.querySelectorAll('.entry').forEach(e=>e.onclick=()=>{const it=f.items[+e.dataset.i];openURLWindow(it.name,it.icon,it.url)});
 }
 
 function renderIcons(){iconsEl.innerHTML='';desktopIcons.forEach(ic=>{const el=document.createElement('div');el.className='deskIcon';el.style.left=ic.x+'px';el.style.top=ic.y+'px';el.innerHTML=`<div class='box'>${ic.icon}</div><div class='lbl'>${ic.label}</div>`;let drag=false,dx=0,dy=0,moved=false;el.addEventListener('click',e=>{e.stopPropagation();document.querySelectorAll('.deskIcon').forEach(d=>d.classList.remove('sel'));el.classList.add('sel');selected=el;});el.addEventListener('dblclick',e=>{e.stopPropagation();ic.open();});el.addEventListener('pointerdown',e=>{if(e.button!==0)return;drag=true;moved=false;const r=el.getBoundingClientRect();dx=e.clientX-r.left;dy=e.clientY-r.top;el.setPointerCapture(e.pointerId)});el.addEventListener('pointermove',e=>{if(!drag)return;moved=true;const nx=Math.max(4,Math.min(innerWidth-el.offsetWidth-4,e.clientX-dx));const ny=Math.max(4,Math.min(innerHeight-el.offsetHeight-52,e.clientY-dy));el.style.left=nx+'px';el.style.top=ny+'px'});el.addEventListener('pointerup',()=>{drag=false;ic.x=parseInt(el.style.left)||ic.x;ic.y=parseInt(el.style.top)||ic.y;});iconsEl.appendChild(el);});}
@@ -260,12 +275,13 @@ function initAmbientPlayer(){
   const tag=document.createElement('script');tag.src='https://www.youtube.com/iframe_api';document.body.appendChild(tag);
 }
 window.onYouTubeIframeAPIReady=function(){
-  ambientPlayer=new YT.Player('yt-player',{videoId:'4YbEnmqDlWw',playerVars:{autoplay:1,controls:0,loop:1,playlist:'4YbEnmqDlWw',mute:1,modestbranding:1,playsinline:1,rel:0},events:{onReady:(e)=>{ambientReady=true;ambientPlaying=true;setAudioButtonsIcon('⏸');e.target.playVideo();e.target.setVolume(40);},onStateChange:(e)=>{ambientPlaying=e.data===1;setAudioButtonsIcon(ambientPlaying?'⏸':'▶');}}});
+  ambientPlayer=new YT.Player('yt-player',{videoId:'4YbEnmqDlWw',playerVars:{autoplay:1,controls:0,loop:1,playlist:'4YbEnmqDlWw',mute:1,modestbranding:1,playsinline:1,rel:0},events:{onReady:(e)=>{ambientReady=true;ambientPlaying=true;setAudioButtonsIcon('⏸');e.target.playVideo();e.target.setVolume(15);attemptUnmute();},onStateChange:(e)=>{ambientPlaying=e.data===1;setAudioButtonsIcon(ambientPlaying?'⏸':'▶');}}});
 };
-function attemptUnmute(){if(!ambientPlayer||!ambientReady) return;try{ambientPlayer.unMute();ambientPlayer.setVolume(40);}catch{}}
+function attemptUnmute(){if(!ambientPlayer||!ambientReady) return;try{ambientPlayer.unMute();ambientPlayer.setVolume(15);}catch{}}
 function toggleAmbient(){if(!ambientPlayer){initAmbientPlayer();return;}const st=ambientPlayer.getPlayerState?.();if(st===1){ambientPlayer.pauseVideo();setAudioButtonsIcon('▶');}else{ambientPlayer.playVideo();attemptUnmute();setAudioButtonsIcon('⏸');}}
 document.getElementById('audioBtnIntro').addEventListener('click',e=>{e.stopPropagation();toggleAmbient()});
 document.getElementById('audioBtnTask').addEventListener('click',e=>{e.stopPropagation();toggleAmbient()});
+initAmbientPlayer();
 
 const fmt=new Intl.DateTimeFormat('es-CL',{timeZone:'America/Santiago',hour:'2-digit',minute:'2-digit',year:'numeric',month:'2-digit',day:'2-digit',hour12:false});
 setInterval(()=>document.getElementById('clock').textContent=fmt.format(new Date()),1000);
