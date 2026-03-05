@@ -378,17 +378,13 @@
       background: rgba(0,0,0,.25);
       margin: 6px 0;
     }
-    .menuHint{
-      font-size: 11px;
-      opacity: .75;
-      padding: 6px 8px 10px;
-    }
+    .menuHint{ display:none; }
 
     /* ========================= WINDOWS (Win95) ========================= */
     .win{
       position:absolute;
-      width: min(860px, calc(100vw - 40px));
-      height: min(560px, calc(100vh - 150px));
+      width: min(880px, calc(100vw - 28px));
+      height: min(620px, calc(100vh - 96px));
       left: 180px;
       top: 70px;
       border-radius: 0;
@@ -453,9 +449,12 @@
       height: calc(100% - 28px);
       background: var(--w95-face);
       overflow:auto;
-      padding: 12px;
+      padding: 8px;
       color:#000;
     }
+    .win.compact{ width:min(460px, calc(100vw - 18px)); height:min(380px, calc(100vh - 90px)); }
+    .win.media{ width:min(1024px, calc(100vw - 18px)); height:min(720px, calc(100vh - 90px)); }
+    .win.docs{ width:min(680px, calc(100vw - 18px)); height:min(520px, calc(100vh - 90px)); }
     .panel{
       border: 2px solid;
       border-color: var(--w95-dark) var(--w95-light) var(--w95-light) var(--w95-dark);
@@ -560,6 +559,8 @@
     }
     .docItem:hover{ background:#000080; color:#fff; }
     .docItem:hover .muted{ color:#d9d9ff; }
+    .runBox{ display:flex; gap:8px; align-items:center; margin-top:8px; }
+    .runBox input{ flex:1; height:30px; border:2px solid; border-color: var(--w95-dark) var(--w95-light) var(--w95-light) var(--w95-dark); padding: 0 8px; }
     .hiddenNoise,[class*="odoo" i],[id*="odoo" i],[class*="cookie" i],[id*="cookie" i]{ display:none !important; }
 
     @media (max-width: 560px){
@@ -663,6 +664,8 @@ const TRAIL_GIFS = [
   "https://media.giphy.com/media/3og0IJa2xGWfhLf7s4/giphy.gif",
   "https://media.giphy.com/media/pGskRXx85Qwp2/giphy.gif",
   "https://media.giphy.com/media/amBY86NnEamRTF9zyL/giphy.gif",
+  "https://media.giphy.com/media/lUZeKq81VSmc6ifBEM/giphy.gif",
+  "https://media.giphy.com/media/YOSwXpWj4SV7jBK0mp/giphy.gif",
   "https://raw.githubusercontent.com/KeanuCheese/Theme-K/a1eb6484394fc2ee14767d4c9be39508fc3a607d/block.jpg",
   "https://raw.githubusercontent.com/KeanuCheese/Theme-K/d4dafe9271194126ed59309f61e3baa85b95dbd5/Ghost-Machine-_28999.jpg"
 ];
@@ -710,7 +713,7 @@ function normalizeEmbed(url){
 
 const ITEMS={
   documents:{title:'Documents',icon:'📄',type:'list',items:[{title:'El_Principito_Antoine_de_SaintExupéry',icon:'📕',url:'https://digitales.bcn.gob.ar/files/textos/El-Principitocompleto.pdf',kind:'pdf'}]},
-  run:{title:'Run…',icon:'▶',type:'text',html:'<div class="panel">Use Start o Desktop para abrir apps.</div>'},
+  run:{title:'Run…',icon:'▶',type:'run'},
   collabs:{title:'Collabs',icon:'📁',type:'list',items:[
     {title:'Amazonic',icon:'🧾',url:'https://amazonicwav.tumblr.com/',kind:'web'},
     {title:'Loot apparel boutique',icon:'🛍️',url:'https://www.etsy.com/shop/LootApparelBoutique?ref=dashboard-header',kind:'web'}
@@ -733,16 +736,20 @@ const ITEMS={
 const openWindows=new Map(); let zTop=10;
 function mkBody(item){
   if(item.type==='text') return item.html;
-  if(item.type==='calc') return `<div class="calc" id="calcRoot"><div class="calcDisplay" id="calcDisplay">0</div><div class="calcGrid">${['C','⌫','%','/','7','8','9','*','4','5','6','-','1','2','3','+','0','.','=','*'].slice(0,19).map(k=>`<div class="calcBtn" data-k="${k==='*'?'=':k}">${k==='*'?'×':k}</div>`).join('')}</div></div>`;
+  if(item.type==='calc') return `<div class="calc" id="calcRoot"><div class="calcDisplay" id="calcDisplay">0</div><div class="calcGrid">${['C','⌫','%','/','7','8','9','*','4','5','6','-','1','2','3','+','0','.','='].map(k=>`<div class="calcBtn" data-k="${k}">${k==='*'?'×':k}</div>`).join('')}</div></div>`;
+  if(item.type==='run') return `<div class="panel"><div style="font-size:12px;font-weight:700;">Run</div><div class="muted" style="font-size:12px;">Open app id (documents, collabs, multimedia, calculator) or URL.</div><div class="runBox"><input id="runInput" placeholder="documents o https://..." /><button class="btn" id="runGo" style="width:58px;">OK</button></div></div>`;
   if(item.type==='list') return `<div class="panel"><div class="docList">${item.items.map((it,i)=>`<div class="docItem" data-idx="${i}"><div>${it.icon}</div><div><div>${it.title}</div><div class="muted">${it.url}</div></div></div>`).join('')}</div></div>`;
   const src=normalizeEmbed(item.url);
-  return `<iframe class="viewerFrame" referrerpolicy="no-referrer" allowfullscreen src="${src}"></iframe>`;
+  return `<iframe class="viewerFrame" referrerpolicy="no-referrer" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen src="${src}"></iframe>`;
 }
 function focusWindow(win,task){zTop++; win.style.zIndex=zTop; document.querySelectorAll('.task').forEach(t=>t.classList.remove('isActive')); task.classList.add('isActive');}
 function attachDrag(win,header){let on=false,sx=0,sy=0,sl=0,st=0; header.addEventListener('pointerdown',e=>{if(e.target.closest('.btn'))return;on=true;sx=e.clientX;sy=e.clientY;sl=win.offsetLeft;st=win.offsetTop;});window.addEventListener('pointermove',e=>{if(!on||win.classList.contains('max'))return;win.style.left=Math.max(8,Math.min(innerWidth-win.offsetWidth-8,sl+e.clientX-sx))+'px';win.style.top=Math.max(8,Math.min(innerHeight-win.offsetHeight-50,st+e.clientY-sy))+'px';});window.addEventListener('pointerup',()=>on=false);}
 function buildWindow(id){
   const mod=ITEMS[id]; if(!mod) return;
   const win=document.createElement('div'); win.className='win'; win.dataset.id=id;
+  if(mod.type==='calc'||mod.type==='run') win.classList.add('compact');
+  if(mod.type==='list') win.classList.add('docs');
+  if(mod.type==='web') win.classList.add('media');
   win.style.left=(80+Math.random()*120)+'px'; win.style.top=(52+Math.random()*80)+'px';
   win.innerHTML=`<div class="winHeader"><div class="winTitle"><span>${mod.icon}</span><span>${mod.title}</span></div><div class="winBtns"><div class="btn" data-act="min">_</div><div class="btn" data-act="max">□</div><div class="btn" data-act="close">×</div></div></div><div class="winBody ${mod.type==='web'?'noPad':''}">${mkBody(mod)}</div>`;
   desktop.appendChild(win);
@@ -756,6 +763,24 @@ function buildWindow(id){
   if(mod.type==='list'){
     win.querySelectorAll('.docItem').forEach(el=>el.addEventListener('dblclick',()=>{const it=mod.items[+el.dataset.idx]; openViewer(it);}));
   }
+  if(mod.type==='run'){
+    const input=win.querySelector('#runInput');
+    const go=win.querySelector('#runGo');
+    const execRun=()=>{
+      const q=(input.value||'').trim();
+      if(!q){ beep('error'); return; }
+      if(ITEMS[q]){ openApp(q); return; }
+      if(/^https?:\/\//i.test(q)){
+        const id='link_'+btoa(q).replace(/=/g,'');
+        ITEMS[id]={title:q.slice(0,38),icon:'🌐',type:'web',url:q};
+        openApp(id);
+        return;
+      }
+      beep('error');
+    };
+    go.addEventListener('click', execRun);
+    input.addEventListener('keydown', e=>{ if(e.key==='Enter') execRun(); });
+  }
   focusWindow(win,task); beep('open');
 }
 function openViewer(it){
@@ -766,6 +791,8 @@ function openViewer(it){
   }
 }
 function openApp(id){if(openWindows.has(id)){const w=openWindows.get(id);w.win.style.display='block';focusWindow(w.win,w.task);return;} buildWindow(id);}
+
+window.addEventListener('error', ()=>beep('error'));
 
 const ICONS=[
 {id:'documents',label:'Documents',icon:'📄',x:22,y:18},
@@ -783,7 +810,14 @@ startBtn.addEventListener('click',e=>{e.stopPropagation();toggleStart();});
 document.addEventListener('mousedown',e=>{if(startMenu.classList.contains('on')&&!startMenu.contains(e.target)&&!startBtn.contains(e.target)) toggleStart(false);});
 startMenu.addEventListener('click',e=>{
   const it=e.target.closest('.menuItem'); if(!it||it.classList.contains('hasSub')) return;
-  if(it.dataset.action==='shutdown'){toggleStart(false); os.classList.remove('osReady'); intro.style.display='flex'; cta.style.display='block'; return;}
+  if(it.dataset.action==='shutdown'){
+    toggleStart(false);
+    os.classList.remove('osReady');
+    intro.classList.remove('introFadeOut');
+    intro.style.display='flex';
+    cta.style.display='block';
+    return;
+  }
   if(it.dataset.external==='1'){window.open(it.dataset.link,'_blank','noopener'); toggleStart(false); return;}
   if(it.dataset.link){
     const id='link_'+btoa(it.dataset.link).replace(/=/g,''); ITEMS[id]={title:it.textContent.trim(),icon:'🌐',type:'web',url:it.dataset.link}; openApp(id); toggleStart(false); return;
