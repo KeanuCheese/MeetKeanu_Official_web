@@ -116,8 +116,8 @@ const TRAIL_GIFS = [
 "https://raw.githubusercontent.com/KeanuCheese/MeetKeanu/3dbe84c77d707dc8d53f5c50d897026fdea8eec9/kean_wallride.gif","https://raw.githubusercontent.com/KeanuCheese/MeetKeanu/3dbe84c77d707dc8d53f5c50d897026fdea8eec9/kean_5050drop.gif"
 ];
 const intro=document.getElementById('intro'), os=document.getElementById('os'), cta=document.getElementById('cta'), trail=document.getElementById('trail');
-let bag=[],last="",spawnAt=0;
-function refill(){bag=[...TRAIL_GIFS].sort(()=>Math.random()-.5)}
+let bag=[],last="",spawnAt=100;
+function refill(){bag=[...TRAIL_GIFS].sort(()=>Math.random()-.6)}
 function pick(){if(!bag.length)refill();let v=bag.pop();if(v===last&&bag.length)v=bag.pop();last=v;return v}
 refill();
 addEventListener('mousemove',e=>{if(intro.style.display==='none')return;cta.style.left=e.clientX+'px';cta.style.top=e.clientY+'px';cta.classList.add('on');if(performance.now()-spawnAt<300)return;spawnAt=performance.now();const im=new Image();im.className='trailItem';im.style.left=e.clientX+'px';im.style.top=e.clientY+'px';im.style.setProperty('--r',`${Math.floor(Math.random()*46-23)}deg`);im.loading='eager';im.decoding='async';im.onload=()=>{trail.appendChild(im);while(trail.children.length>180)trail.removeChild(trail.firstChild)};im.onerror=()=>{im.remove()};im.src=pick()});
@@ -140,9 +140,9 @@ const modules={
   multimedia:{title:'Multimedia',icon:'🎬',type:'folder',items:[
     {icon:'🎞️',name:'Basquiat_1996_JulianSchnabel',url:'https://www.youtube-nocookie.com/embed/9D9AweGhI3c'},
     {icon:'🎞️',name:'La_Bella_Verte_1996_ColineSerreau',url:'https://odysee.com/@404whiterose:4/La-Belle-Verte-1996-%28The-Green-Beautiful%29-Dvdrip-X264-Highcode-1:b'},
-    {icon:'🎞️',name:'CloudAtlas_2013_LanaWachowski_TomTykwer_LillyWachowski',url:'https://youtu.be/gTHgYkP_ksg?si=h8SkPasXsRMmh1Py'},
-    {icon:'🧛',name:'Bride_of_Deimos_1988_Rintaro_byMadhouse',url:'https://youtu.be/KScaPWhZxmI?si=E_QQSK8grr-BVsQL'},
-    {icon:'🧛',name:'Vampire_HunterD_Bloodlust_2000_YoshiakiKawajiri_byMadhause',url:'https://youtu.be/IIHnnI17joE?si=bX3nugK40jgKXtHf'},
+    {icon:'🎞️',name:'CloudAtlas_2013_LanaWachowski_TomTykwer_LillyWachowski',url:'https://youtube-nocookie.com/gTHgYkP_ksg?si=h8SkPasXsRMmh1Py'},
+    {icon:'🧛',name:'Bride_of_Deimos_1988_Rintaro_byMadhouse',url:'https://youtube-nocookie.com/KScaPWhZxmI?si=E_QQSK8grr-BVsQL'},
+    {icon:'🧛',name:'Vampire_HunterD_Bloodlust_2000_YoshiakiKawajiri_byMadhause',url:'https://youtube-nocookie.com/IIHnnI17joE?si=bX3nugK40jgKXtHf'},
     {icon:'🎬',name:'Estract_Chronos_1985_RonFricke',url:'https://www.youtube-nocookie.com/embed/U-_DxBxDtVE'},
     {icon:'📕',name:'El_Principito_Antoine_de_SaintExupéry',url:'https://digitales.bcn.gob.ar/files/textos/El-Principitocompleto.pdf'}
   ]}
